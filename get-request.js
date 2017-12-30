@@ -8,14 +8,21 @@
 const koa = require('koa');
 const app = new koa();
 app.use(async (ctx) => {
-    let url = ctx.uri;
+    let url = ctx.url;
     let request = ctx.request; //获取 get 请求
-    let req_query = ctx.query;
-    let req_querystring = ctx.querystring;
-    
+
+    //get GET request by context.
+    let ctx_query = ctx.query;
+    let ctx_querystring = ctx.querystring;
+
+    let req_query = request.query;
+    let req_querystring = request.querystring;
+
     ctx.body = {
         url,
         request,
+        ctx_query,
+        ctx_querystring,
         req_query,
         req_querystring
     }
